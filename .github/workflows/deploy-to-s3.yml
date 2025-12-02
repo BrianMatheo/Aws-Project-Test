@@ -1,0 +1,38 @@
+name: Upload Web Project to S3
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Zip project (excluding unnecessary files)
+        run: |
+          zip -r proyecto.zip . \
+            -x ".git" \
+            -x "EC2-S3.sh" \
+            -x "README.md" \
+            -x ".github/*"
+
+      - name: Upload zipped project to S3
+        run: |
+          aws s3 cp proyecto.zip s3://mintic-bucket-680578888516-us-east-1/proyecto.zip
+
+      - name: Verify upload
+        run: |
+          echo "proyecto.zip uploaded successfully to S3"
+          aws s3 ls s3://mintic-bucket-680578888516-us-east-1/proyecto.zip

@@ -1,0 +1,47 @@
+globals [
+  
+  door-open?
+  window1-open?
+  window2-open?
+  
+  ventilation-rate
+  wind-speed
+  
+  room-x
+  room-y
+  room-z
+  room-volume
+  
+  current-co2
+  
+  initial-co2
+  external-co2
+  
+  average-co2
+  
+  window-length
+  window-height
+  
+  door-length
+  door-height
+  
+  window-e
+  door-e
+  
+  window-area
+  door-area
+  
+  current-temperature
+  co2-list         ; para calcular promedio
+  door-coords      ; coordenadas de la puerta
+  window1-coords   ; coordenadas de ventana 1
+  window2-coords   ; coordenadas de ventana 2
+  number-of-students
+  
+  ; Nuevas variables globales
+  students-focused      ; estudiantes enfocados
+  students-attentive    ; estudiantes atentos
+  students-unfocused    ; estudiantes desenfocados
+  average-grade         ; promedio de notas
+  average-headache      ; promedio de dolor de cabeza
+]
